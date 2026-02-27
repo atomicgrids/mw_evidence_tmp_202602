@@ -1,0 +1,27 @@
+name: verify
+
+on:
+  push:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify images and print paths
+        shell: bash
+        run: |
+          shopt -s nullglob
+          latest=(samples/latest/*.png samples/latest/*.jpg samples/latest/*.jpeg)
+          count=
+
+          echo "Latest image count: "
+          if [ "" -lt 2 ]; then
+            echo "Expected at least 2 images in samples/latest"
+            exit 1
+          fi
+
+          echo "FILES:"
+          find samples -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | sort

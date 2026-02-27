@@ -1,0 +1,13 @@
+name: monthly_reminder
+
+on:
+  schedule:
+    - cron: '0 12 1 * *'
+  workflow_dispatch:
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Temporary repo reminder
+        run: echo "Reminder: this is a temporary evidence repo (~30 days). Rotate monthly."
